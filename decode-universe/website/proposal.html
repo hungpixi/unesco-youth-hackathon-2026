@@ -50,7 +50,7 @@
         .section-alt { background: #F1F5F9; }
         .section-tag { display: inline-block; font-family: var(--font-d); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: var(--blue); margin-bottom: 12px; padding: 4px 14px; background: var(--blue-50); border-radius: 999px; border: 1px solid var(--blue-100); }
         .section h2 { font-family: var(--font-d); font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 12px; line-height: 1.25; }
-        .section h2 span { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .section h2 span:not([style]) { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .section-desc { color: var(--text2); font-size: 1.05rem; margin-bottom: 32px; }
         .section h3 { font-family: var(--font-d); font-size: 1.2rem; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
         .section h4 { font-family: var(--font-d); font-size: 1rem; font-weight: 600; margin: 20px 0 8px; }
@@ -646,7 +646,7 @@
         <div class="container">
             <span class="section-tag">UNESCO Alignment</span>
             <h2>Phù hợp <span>giá trị UNESCO</span></h2>
-            <div class="card-grid">
+            <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="card"><div class="card-icon">☮️</div><h4>Hòa bình</h4><p>Chống phân cực và hate speech thông qua tư duy phản biện.</p></div>
                 <div class="card"><div class="card-icon">🌈</div><h4>Đa dạng</h4><p>6 nhân vật, 6 quốc gia, 3 nam + 3 nữ, đa văn hóa.</p></div>
                 <div class="card"><div class="card-icon">🗣️</div><h4>Tự do biểu đạt</h4><p>Dạy tạo nội dung có trách nhiệm, KHÔNG kiểm duyệt.</p></div>
@@ -657,7 +657,7 @@
 
     <!-- CTA -->
     <section class="section" style="background: linear-gradient(135deg, var(--blue), var(--purple)); text-align: center; padding: 60px 24px;">
-        <h2 style="font-family: var(--font-d); color: #fff; font-size: clamp(1.5rem, 3.5vw, 2.2rem); margin-bottom: 12px;">Chúng ta không chỉ dạy MIL.<br>Chúng ta biến nó thành <span style="color: #FBBF24;">trải nghiệm</span>.</h2>
+        <h2 style="font-family: var(--font-d); color: #fff; font-size: clamp(1.5rem, 3.5vw, 2.2rem); margin-bottom: 12px;">Chúng ta không chỉ dạy MIL.<br>Chúng ta biến nó thành <span style="color: #FBBF24 !important; -webkit-text-fill-color: #FBBF24 !important; background: none !important;">trải nghiệm</span>.</h2>
         <p style="color: rgba(255,255,255,0.8); font-family: var(--font-d); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 24px;">DECODE — Giải Mã Thông Tin</p>
         <div style="display: inline-flex; flex-direction: column; gap: 4px; background: rgba(255,255,255,0.15); padding: 14px 28px; border-radius: 14px;">
             <span style="color: rgba(255,255,255,0.9); font-size: 0.85rem;">🏆 UNESCO Youth Hackathon 2026</span>
