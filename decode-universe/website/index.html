@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DECODE — See Through the Noise | UNESCO Youth Hackathon 2026</title>
+    <meta name="description" content="DECODE is a transmedia MIL education ecosystem combining Video, Board Game, and Webtoon Comics to help youth navigate the information landscape.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-icon">🔓</span>
+                <span class="logo-text">DECODE</span>
+            </a>
+            <div class="nav-links">
+                <a href="#problem" class="nav-link">Problem</a>
+                <a href="#solution" class="nav-link">Solution</a>
+                <a href="#pillars" class="nav-link">3 Pillars</a>
+                <a href="#framework" class="nav-link">Framework</a>
+                <a href="#characters" class="nav-link">Characters</a>
+                <a href="#impact" class="nav-link">Impact</a>
+                <a href="proposal.html" class="nav-link" style="color:#2563EB;font-weight:600;">Proposal VN 🇻🇳</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#problem" class="mobile-link">Problem</a>
+        <a href="#solution" class="mobile-link">Solution</a>
+        <a href="#pillars" class="mobile-link">3 Pillars</a>
+        <a href="#framework" class="mobile-link">Framework</a>
+        <a href="#characters" class="mobile-link">Characters</a>
+        <a href="#impact" class="mobile-link">Impact</a>
+        <a href="proposal.html" class="mobile-link" style="color:#2563EB;font-weight:600;">🇻🇳 Proposal Tiếng Việt</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-elements">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+            <div class="noise-grid"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                UNESCO Youth Hackathon 2026
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">See Through</span>
+                <span class="title-line title-accent">The Noise</span>
+            </h1>
+            <p class="hero-subtitle">A transmedia education ecosystem that teaches Media & Information Literacy through <strong>Video Stories</strong>, <strong>Board Games</strong>, and <strong>Webtoon Comics</strong> — all connected in one universe.</p>
+            <div class="hero-actions">
+                <a href="#solution" class="btn btn-primary">
+                    <span>Explore DECODE</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </a>
+                <a href="#framework" class="btn btn-outline">Learn the Method</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-target="79">0</span><span class="stat-suffix">M</span>
+                    <span class="stat-label">Social media users in Vietnam</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-target="72">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Youth share without verifying</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-target="117">0</span><span class="stat-suffix">K</span>
+                    <span class="stat-label">Content removed in H1 2026</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section section-problem" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">The Problem</span>
+                <h2 class="section-title">We're Drowning in <span class="highlight">Noise</span></h2>
+                <p class="section-desc">In a world where anyone can create content and AI can fabricate reality, young people face an unprecedented challenge: <strong>separating signal from noise</strong>.</p>
+            </div>
+            <div class="problem-cards">
+                <div class="problem-card" data-delay="0">
+                    <div class="card-icon">🤖</div>
+                    <h3>AI-Generated Disinformation</h3>
+                    <p>Deepfakes, AI-written articles, and synthetic media are becoming indistinguishable from real content. Youth are the most vulnerable.</p>
+                    <div class="card-stat">
+                        <span class="card-stat-number">68%</span>
+                        <span>of Gen Z can't identify AI-generated images</span>
+                    </div>
+                </div>
+                <div class="problem-card" data-delay="100">
+                    <div class="card-icon">📱</div>
+                    <h3>Filter Bubbles & Echo Chambers</h3>
+                    <p>Algorithms feed us what we want to hear, creating polarization and making us more susceptible to manipulation.</p>
+                    <div class="card-stat">
+                        <span class="card-stat-number">5.2h</span>
+                        <span>average daily screen time for Vietnamese youth</span>
+                    </div>
+                </div>
+                <div class="problem-card" data-delay="200">
+                    <div class="card-icon">⚡</div>
+                    <h3>Share First, Think Later</h3>
+                    <p>Emotional content spreads 6x faster than factual content. Most shares happen within seconds — before any critical thinking occurs.</p>
+                    <div class="card-stat">
+                        <span class="card-stat-number">6x</span>
+                        <span>faster spread of emotional vs. factual content</span>
+                    </div>
+                </div>
+            </div>
+            <div class="problem-quote">
+                <blockquote>
+                    "Punishment doesn't solve the root cause. <strong>Education does.</strong>"
+                </blockquote>
+                <p class="quote-context">Vietnam's Decree 174/2026 fines up to 50M VND for spreading fake news — but fines alone can't teach critical thinking.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section section-solution" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">The Solution</span>
+                <h2 class="section-title">One Universe. <span class="highlight">Three Gateways.</span></h2>
+                <p class="section-desc">DECODE is the world's first transmedia MIL education ecosystem — where every medium tells a different part of the same story, and you need all three to see the full picture.</p>
+            </div>
+            <div class="universe-visual">
+                <div class="universe-center">
+                    <div class="universe-core">
+                        <span class="core-emoji">🔓</span>
+                        <span class="core-text">DECODE<br>Universe</span>
+                    </div>
+                </div>
+                <div class="universe-orbit orbit-1">
+                    <div class="orbit-item" data-pillar="video">
+                        <span class="orbit-icon">📺</span>
+                        <span class="orbit-label">Video</span>
+                    </div>
+                </div>
+                <div class="universe-orbit orbit-2">
+                    <div class="orbit-item" data-pillar="game">
+                        <span class="orbit-icon">🎲</span>
+                        <span class="orbit-label">Game</span>
+                    </div>
+                </div>
+                <div class="universe-orbit orbit-3">
+                    <div class="orbit-item" data-pillar="comics">
+                        <span class="orbit-icon">📖</span>
+                        <span class="orbit-label">Comics</span>
+                    </div>
+                </div>
+                <div class="connection-lines">
+                    <svg class="connections-svg" viewBox="0 0 400 400">
+                        <line x1="200" y1="80" x2="90" y2="280" class="conn-line" />
+                        <line x1="200" y1="80" x2="310" y2="280" class="conn-line" />
+                        <line x1="90" y1="280" x2="310" y2="280" class="conn-line" />
+                    </svg>
+                </div>
+            </div>
+            <div class="transmedia-flow">
+                <div class="flow-step">
+                    <div class="flow-arrow">→</div>
+                    <span>Start from <strong>any</strong> medium</span>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-arrow">→</div>
+                    <span>Cross-references lead to <strong>other</strong> mediums</span>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-arrow">→</div>
+                    <span>Complete all three for the <strong>full experience</strong></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Pillars Section -->
+    <section class="section section-pillars" id="pillars">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Three Pillars</span>
+                <h2 class="section-title">Hook. Experience. <span class="highlight">Deep Dive.</span></h2>
+            </div>
+
+            <!-- Pillar 1: Video -->
+            <div class="pillar" id="pillar-video">
+                <div class="pillar-header">
+                    <div class="pillar-number">01</div>
+                    <div class="pillar-icon">📺</div>
+                    <div class="pillar-meta">
+                        <h3 class="pillar-title">DECODE Stories</h3>
+                        <span class="pillar-role">THE HOOK — Sparks Curiosity</span>
+                    </div>
+                </div>
+                <div class="pillar-content">
+                    <p class="pillar-desc">A 6-episode mini-documentary series featuring real stories from Vietnamese and global youth. Each episode tackles a different MIL competency — from spotting fake news to understanding AI-generated content.</p>
+                    <div class="episode-grid">
+                        <div class="episode-card">
+                            <span class="ep-num">EP 01</span>
+                            <h4>The Viral Trap</h4>
+                            <p>A real story of a student who shared fake news and faced consequences</p>
+                            <span class="ep-skill">ACCESS</span>
+                        </div>
+                        <div class="episode-card">
+                            <span class="ep-num">EP 02</span>
+                            <h4>Who's Behind the Screen?</h4>
+                            <p>Anatomy of a fake account and bot farm operations</p>
+                            <span class="ep-skill">EVALUATE</span>
+                        </div>
+                        <div class="episode-card">
+                            <span class="ep-num">EP 03</span>
+                            <h4>AI Wrote This</h4>
+                            <p>Deepfakes, AI text, synthetic media — can you tell what's real?</p>
+                            <span class="ep-skill">UNDERSTAND</span>
+                        </div>
+                        <div class="episode-card">
+                            <span class="ep-num">EP 04</span>
+                            <h4>The Algorithm Knows You</h4>
+                            <p>Filter bubbles, echo chambers, and recommendation traps</p>
+                            <span class="ep-skill">ANALYZE</span>
+                        </div>
+                        <div class="episode-card">
+                            <span class="ep-num">EP 05</span>
+                            <h4>Your Data, Their Profit</h4>
+                            <p>Privacy, data harvesting, and targeted advertising</p>
+                            <span class="ep-skill">EVALUATE</span>
+                        </div>
+                        <div class="episode-card">
+                            <span class="ep-num">EP 06</span>
+                            <h4>Be the Signal</h4>
+                            <p>How to create responsible content and become a fact-checker</p>
+                            <span class="ep-skill">CREATE</span>
+                        </div>
+                    </div>
+                    <div class="pillar-connect">
+                        <span class="connect-label">🔗 Cross-media connection:</span>
+                        <span>Each video ends with a "DECODE Challenge" — the same scenario appears as a Content Card in the board game and as a plot point in the comics.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillar 2: Board Game -->
+            <div class="pillar" id="pillar-game">
+                <div class="pillar-header">
+                    <div class="pillar-number">02</div>
+                    <div class="pillar-icon">🎲</div>
+                    <div class="pillar-meta">
+                        <h3 class="pillar-title">DECODE: The Game</h3>
+                        <span class="pillar-role">THE EXPERIENCE — Learn by Doing</span>
+                    </div>
+                </div>
+                <div class="pillar-content">
+                    <p class="pillar-desc">A 30-45 minute board game for 4-6 players. Investigate content cards using DECODE method cards, debate with other players, and vote on what's real, misleading, or fake. Every card has a QR code linking to related comics and videos.</p>
+                    <div class="game-phases">
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-num">Phase 1</span>
+                                <h4>THE FEED</h4>
+                                <span class="phase-time">5 min</span>
+                            </div>
+                            <p>Draw 5 Content Cards — news, posts, videos, memes. Classify each as REAL, MISLEADING, or FAKE.</p>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-num">Phase 2</span>
+                                <h4>THE INVESTIGATION</h4>
+                                <span class="phase-time">15 min</span>
+                            </div>
+                            <p>Use DECODE Cards to fact-check. Handle Event Cards (AI Deepfake Alert! Bot Network Activated!). Debate and persuade.</p>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-header">
+                                <span class="phase-num">Phase 3</span>
+                                <h4>THE VERDICT</h4>
+                                <span class="phase-time">10 min</span>
+                            </div>
+                            <p>Community vote → Compare with Truth Cards → Score points → Reflection: "Why were we fooled?"</p>
+                        </div>
+                    </div>
+                    <div class="game-feature">
+                        <span class="feature-badge">🖨️ Print-and-Play</span>
+                        <p>Free PDF download — any teacher, anywhere in the world, can print and play tomorrow. Zero cost, maximum impact.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillar 3: Comics -->
+            <div class="pillar" id="pillar-comics">
+                <div class="pillar-header">
+                    <div class="pillar-number">03</div>
+                    <div class="pillar-icon">📖</div>
+                    <div class="pillar-meta">
+                        <h3 class="pillar-title">DECODE Chronicles</h3>
+                        <span class="pillar-role">THE DEEP DIVE — Empathy Through Story</span>
+                    </div>
+                </div>
+                <div class="pillar-content">
+                    <p class="pillar-desc">A 6-chapter webtoon series following diverse characters from around the world as they face real MIL challenges. Manga/manhwa style, optimized for mobile vertical scrolling. Each chapter connects to a video episode and board game scenario.</p>
+                    <div class="characters-preview">
+                        <div class="char-card" data-country="🇻🇳">
+                            <div class="char-avatar">M</div>
+                            <h4>Minh</h4>
+                            <span class="char-age">19, Vietnam</span>
+                            <p>Tech-savvy student who shares without checking. Journey: spreader → decoder.</p>
+                        </div>
+                        <div class="char-card" data-country="🇳🇬">
+                            <div class="char-avatar">A</div>
+                            <h4>Aisha</h4>
+                            <span class="char-age">22, Nigeria</span>
+                            <p>Aspiring journalist fighting fake news. Discovers a bot farm at her university.</p>
+                        </div>
+                        <div class="char-card" data-country="🇯🇵">
+                            <div class="char-avatar">K</div>
+                            <h4>Kai</h4>
+                            <span class="char-age">20, Japan</span>
+                            <p>Gamer & AI enthusiast who uncovers deepfakes of his favorite idol.</p>
+                        </div>
+                        <div class="char-card" data-country="🇧🇷">
+                            <div class="char-avatar">L</div>
+                            <h4>Luna</h4>
+                            <span class="char-age">21, Brazil</span>
+                            <p>Content creator whose image was stolen. Learns about privacy & data rights.</p>
+                        </div>
+                        <div class="char-card" data-country="🇺🇸">
+                            <div class="char-avatar">S</div>
+                            <h4>Sam</h4>
+                            <span class="char-age">18, USA</span>
+                            <p>High schooler cyberbullied through fake news. Becomes an advocate.</p>
+                        </div>
+                        <div class="char-card" data-country="🇮🇳">
+                            <div class="char-avatar">P</div>
+                            <h4>Priya</h4>
+                            <span class="char-age">23, India</span>
+                            <p>Coder who builds a misinformation detection tool. The meta-creator.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section class="section section-framework" id="framework">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">The Method</span>
+                <h2 class="section-title">The DECODE <span class="highlight">Framework</span></h2>
+                <p class="section-desc">Six steps to decode any piece of information. The name IS the method. Easy to remember, powerful to apply.</p>
+            </div>
+            <div class="framework-steps">
+                <div class="fw-step" data-step="D">
+                    <div class="fw-letter">D</div>
+                    <div class="fw-content">
+                        <h3>Detect</h3>
+                        <p class="fw-question">"Is something off? Am I feeling emotionally triggered?"</p>
+                        <p class="fw-desc">Recognize red flags: sensational headlines, urgent language, emotional manipulation, too-good-to-be-true claims.</p>
+                    </div>
+                </div>
+                <div class="fw-step" data-step="E">
+                    <div class="fw-letter">E</div>
+                    <div class="fw-content">
+                        <h3>Evidence</h3>
+                        <p class="fw-question">"What's the source? Is there concrete proof?"</p>
+                        <p class="fw-desc">Look for citations, data, named experts, verifiable facts. No evidence = no credibility.</p>
+                    </div>
+                </div>
+                <div class="fw-step" data-step="C">
+                    <div class="fw-letter">C</div>
+                    <div class="fw-content">
+                        <h3>Cross-check</h3>
+                        <p class="fw-question">"What do other sources say? Can anyone confirm?"</p>
+                        <p class="fw-desc">Check at least 3 independent sources. If only one source reports it, be skeptical.</p>
+                    </div>
+                </div>
+                <div class="fw-step" data-step="O">
+                    <div class="fw-letter">O</div>
+                    <div class="fw-content">
+                        <h3>Origin</h3>
+                        <p class="fw-question">"Who created this? Real person, bot, or AI?"</p>
+                        <p class="fw-desc">Investigate the creator's identity, history, and credibility. Check for bot patterns, AI watermarks, account age.</p>
+                    </div>
+                </div>
+                <div class="fw-step" data-step="D2">
+                    <div class="fw-letter">D</div>
+                    <div class="fw-content">
+                        <h3>Determine Motive</h3>
+                        <p class="fw-question">"Why was this created? Who benefits?"</p>
+                        <p class="fw-desc">Follow the money, power, or attention. Is it clickbait? Propaganda? Satire? Understanding motive reveals intent.</p>
+                    </div>
+                </div>
+                <div class="fw-step" data-step="E2">
+                    <div class="fw-letter">E</div>
+                    <div class="fw-content">
+                        <h3>Evaluate Impact</h3>
+                        <p class="fw-question">"If I share this, what happens? Who gets hurt?"</p>
+                        <p class="fw-desc">Consider consequences before sharing. Your share button is a megaphone — use it responsibly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Characters Section -->
+    <section class="section section-characters" id="characters">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">The Cast</span>
+                <h2 class="section-title">Six Stories. <span class="highlight">Six Countries.</span></h2>
+                <p class="section-desc">Each character represents a real challenge that youth face in the digital information landscape. Their stories weave through all three mediums.</p>
+            </div>
+            <div class="character-showcase">
+                <div class="char-detail active" id="char-minh">
+                    <div class="char-info">
+                        <div class="char-flag">🇻🇳</div>
+                        <h3 class="char-name">Minh</h3>
+                        <p class="char-role">The Accidental Spreader</p>
+                        <p class="char-story">Minh is a 19-year-old computer science student in Hanoi. Smart, curious, always online. One day he shares a shocking health article without checking — it goes viral, causes panic, and his university gets involved. His journey from careless sharer to critical thinker is the heart of DECODE.</p>
+                        <div class="char-arc">
+                            <span class="arc-start">📱 Spreader</span>
+                            <span class="arc-arrow">→</span>
+                            <span class="arc-middle">🔍 Investigator</span>
+                            <span class="arc-arrow">→</span>
+                            <span class="arc-end">🔓 Decoder</span>
+                        </div>
+                        <div class="char-media">
+                            <span class="media-tag">📺 Video Ep.1</span>
+                            <span class="media-tag">🎲 Content Card Set A</span>
+                            <span class="media-tag">📖 Chapter 1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="char-selector">
+                <button class="char-btn active" data-char="minh">🇻🇳 Minh</button>
+                <button class="char-btn" data-char="aisha">🇳🇬 Aisha</button>
+                <button class="char-btn" data-char="kai">🇯🇵 Kai</button>
+                <button class="char-btn" data-char="luna">🇧🇷 Luna</button>
+                <button class="char-btn" data-char="sam">🇺🇸 Sam</button>
+                <button class="char-btn" data-char="priya">🇮🇳 Priya</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="section section-impact" id="impact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Impact & Scalability</span>
+                <h2 class="section-title">Low Cost. <span class="highlight">Maximum Reach.</span></h2>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">🌍</div>
+                    <h3>Global by Design</h3>
+                    <p>Modular Content Cards can be localized for any country. Translate rules + comics for instant adaptation.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🖨️</div>
+                    <h3>Print-and-Play</h3>
+                    <p>Any teacher can download the PDF, print at school, and start playing tomorrow. Zero budget required.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">📱</div>
+                    <h3>Mobile-First Comics</h3>
+                    <p>Webtoon format optimized for how youth actually consume content — on their phones, vertically.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🤖</div>
+                    <h3>AI Literacy Ready</h3>
+                    <p>Unlike older frameworks, DECODE specifically addresses AI-generated content, deepfakes, and synthetic media.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🔓</div>
+                    <h3>Open Source</h3>
+                    <p>All materials under CC-BY-SA license. Communities can contribute new Content Cards, translations, and scenarios.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">📈</div>
+                    <h3>Expansion Packs</h3>
+                    <p>New themes (Climate Disinfo, Health Misinfo, Election Integrity) can be added as modular card packs.</p>
+                </div>
+            </div>
+            <div class="impact-math">
+                <div class="math-equation">
+                    <div class="math-term">
+                        <span class="math-num">1</span>
+                        <span class="math-label">Video</span>
+                    </div>
+                    <span class="math-op">×</span>
+                    <div class="math-term">
+                        <span class="math-num">100K</span>
+                        <span class="math-label">Views</span>
+                    </div>
+                    <span class="math-op">+</span>
+                    <div class="math-term">
+                        <span class="math-num">1</span>
+                        <span class="math-label">Game</span>
+                    </div>
+                    <span class="math-op">×</span>
+                    <div class="math-term">
+                        <span class="math-num">100</span>
+                        <span class="math-label">Schools</span>
+                    </div>
+                    <span class="math-op">×</span>
+                    <div class="math-term">
+                        <span class="math-num">6</span>
+                        <span class="math-label">Players</span>
+                    </div>
+                    <span class="math-op">=</span>
+                    <div class="math-result">
+                        <span class="math-num">100,600+</span>
+                        <span class="math-label">Youth Reached</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNESCO Alignment Section -->
+    <section class="section section-alignment">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">UNESCO Alignment</span>
+                <h2 class="section-title">Built on <span class="highlight">UNESCO Values</span></h2>
+            </div>
+            <div class="alignment-grid">
+                <div class="align-item">
+                    <span class="align-icon">☮️</span>
+                    <h4>Peace</h4>
+                    <p>Fighting hate speech and reducing polarization through understanding</p>
+                </div>
+                <div class="align-item">
+                    <span class="align-icon">🌈</span>
+                    <h4>Diversity</h4>
+                    <p>6 characters from 6 countries, 3 male + 3 female, multicultural stories</p>
+                </div>
+                <div class="align-item">
+                    <span class="align-icon">🗣️</span>
+                    <h4>Freedom of Expression</h4>
+                    <p>Teaching responsible content creation, not censorship</p>
+                </div>
+                <div class="align-item">
+                    <span class="align-icon">📚</span>
+                    <h4>SDG 4: Quality Education</h4>
+                    <p>Directly serving inclusive, equitable, lifelong learning for all</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section section-cta">
+        <div class="cta-bg">
+            <div class="cta-shape cta-shape-1"></div>
+            <div class="cta-shape cta-shape-2"></div>
+            <div class="cta-shape cta-shape-3"></div>
+        </div>
+        <div class="container" style="position:relative;z-index:2;">
+            <div class="cta-content">
+                <div class="cta-eyebrow">🏆 UNESCO Youth Hackathon 2026</div>
+                <h2 class="cta-title">We don't just teach MIL.<br>We make it an <span class="highlight">experience</span>.</h2>
+                <p class="cta-subtitle">DECODE — See Through the Noise</p>
+                <div class="cta-actions">
+                    <a href="proposal.html" class="cta-btn cta-btn-light">Xem Proposal 🇻🇳</a>
+                    <a href="#pillars" class="cta-btn cta-btn-ghost">Explore Pillars ↑</a>
+                </div>
+                <div class="cta-meta">
+                    <div class="cta-meta-item">
+                        <span class="cta-meta-label">Track</span>
+                        <span class="cta-meta-value">AI & Media Literacy</span>
+                    </div>
+                    <div class="cta-meta-divider"></div>
+                    <div class="cta-meta-item">
+                        <span class="cta-meta-label">Finals</span>
+                        <span class="cta-meta-value">Thessaloniki, Greece 🇬🇷</span>
+                    </div>
+                    <div class="cta-meta-divider"></div>
+                    <div class="cta-meta-item">
+                        <span class="cta-meta-label">License</span>
+                        <span class="cta-meta-value">CC-BY-SA 4.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <span class="footer-logo">🔓 DECODE</span>
+                        <p>See Through the Noise</p>
+                        <p class="footer-desc">A transmedia education ecosystem for Media & Information Literacy — combining Video, Board Games, and Comics.</p>
+                    </div>
+                    <div class="footer-nav">
+                        <div class="footer-col">
+                            <h4>Explore</h4>
+                            <a href="#pillars">3 Pillars</a>
+                            <a href="#framework">DECODE Method</a>
+                            <a href="#characters">Characters</a>
+                            <a href="#impact">Impact</a>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Resources</h4>
+                            <a href="proposal.html">Proposal VN 🇻🇳</a>
+                            <a href="#">Board Game PDF</a>
+                            <a href="#">Comics</a>
+                            <a href="#">Video Series</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2026 DECODE • UNESCO Youth Hackathon</span>
+                    <span>CC-BY-SA 4.0 • Open Source • Made with ❤️ for Media Literacy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

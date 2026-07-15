@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DECODE — Proposal Tiếng Việt | UNESCO Youth Hackathon 2026</title>
+    <meta name="description" content="DECODE - Hệ sinh thái giáo dục Media & Information Literacy tích hợp Video, Board Game và Webtoon Comics">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --blue: #2563EB; --blue-light: #3B82F6; --blue-dark: #1D4ED8;
+            --blue-50: #EFF6FF; --blue-100: #DBEAFE; --blue-200: #BFDBFE;
+            --amber: #F59E0B; --green: #10B981; --red: #EF4444; --purple: #8B5CF6; --pink: #EC4899;
+            --bg: #FAFBFE; --surface: #FFFFFF; --text: #0F172A; --text2: #475569; --text3: #94A3B8;
+            --border: #E2E8F0; --font-d: 'Space Grotesk', sans-serif; --font-b: 'Inter', sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-b); color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        a { color: var(--blue); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Nav */
+        .nav { position: sticky; top: 0; z-index: 50; background: rgba(250,251,254,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 12px 0; }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        .nav-logo { font-family: var(--font-d); font-weight: 700; font-size: 1.1rem; color: var(--blue); letter-spacing: 2px; display: flex; align-items: center; gap: 6px; }
+        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text2); }
+        .nav-links a:hover { color: var(--blue); text-decoration: none; }
+        @media(max-width:640px) { .nav-links { display: none; } }
+
+        /* Hero */
+        .hero { text-align: center; padding: 80px 24px 60px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-50); color: var(--blue); padding: 6px 18px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--blue-200); margin-bottom: 20px; }
+        .hero h1 { font-family: var(--font-d); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 1.1rem; color: var(--text2); max-width: 650px; margin: 0 auto 32px; }
+        .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 12px 24px; border-radius: 999px; font-family: var(--font-d); font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 4px 16px rgba(37,99,235,0.3); }
+        .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); text-decoration: none; color: #fff; }
+        .btn-outline { background: transparent; color: var(--blue); border: 2px solid var(--blue-200); }
+        .btn-outline:hover { background: var(--blue-50); text-decoration: none; }
+
+        /* Sections */
+        .section { padding: 60px 0; }
+        .section-alt { background: #F1F5F9; }
+        .section-tag { display: inline-block; font-family: var(--font-d); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: var(--blue); margin-bottom: 12px; padding: 4px 14px; background: var(--blue-50); border-radius: 999px; border: 1px solid var(--blue-100); }
+        .section h2 { font-family: var(--font-d); font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 12px; line-height: 1.25; }
+        .section h2 span { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .section-desc { color: var(--text2); font-size: 1.05rem; margin-bottom: 32px; }
+        .section h3 { font-family: var(--font-d); font-size: 1.2rem; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
+        .section h4 { font-family: var(--font-d); font-size: 1rem; font-weight: 600; margin: 20px 0 8px; }
+
+        /* Cards */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: all 0.25s; }
+        .card:hover { box-shadow: 0 4px 16px rgba(15,23,42,0.08); transform: translateY(-3px); border-color: var(--blue-200); }
+        .card-icon { font-size: 2rem; margin-bottom: 10px; }
+        .card h4 { font-family: var(--font-d); font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+        .card p { color: var(--text2); font-size: 0.9rem; line-height: 1.6; }
+
+        /* Stats */
+        .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0; }
+        .stat-item { text-align: center; padding: 16px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+        .stat-num { font-family: var(--font-d); font-size: 1.8rem; font-weight: 700; color: var(--blue); }
+        .stat-label { font-size: 0.75rem; color: var(--text3); margin-top: 2px; }
+
+        /* Table */
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { font-family: var(--font-d); font-weight: 600; background: var(--blue-50); color: var(--text); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        td { color: var(--text2); }
+        tr:hover td { background: #F8FAFC; }
+        @media(max-width:640px) { table { font-size: 0.8rem; } th, td { padding: 8px 10px; } }
+
+        /* Framework */
+        .fw-steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+        .fw-step { display: flex; gap: 16px; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; align-items: flex-start; transition: all 0.2s; }
+        .fw-step:hover { border-color: var(--blue-200); box-shadow: 0 2px 8px rgba(15,23,42,0.06); }
+        .fw-letter { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--font-d); font-size: 1.5rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+        .fw-step h4 { margin: 0 0 4px; font-size: 0.95rem; }
+        .fw-step p { margin: 0; color: var(--text2); font-size: 0.85rem; line-height: 1.5; }
+        .fw-step .q { font-style: italic; color: var(--blue); font-size: 0.85rem; }
+
+        /* Team */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 20px 0; }
+        .team-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s; }
+        .team-card:hover { box-shadow: 0 4px 16px rgba(15,23,42,0.08); border-color: var(--blue-200); }
+        .team-avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--purple)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-d); font-size: 1.3rem; font-weight: 700; margin: 0 auto 10px; }
+        .team-card h4 { font-family: var(--font-d); font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+        .team-card .role { font-size: 0.8rem; color: var(--blue); font-weight: 600; margin-bottom: 6px; }
+        .team-card p { font-size: 0.8rem; color: var(--text3); line-height: 1.4; }
+
+        /* Hypothesis */
+        .hypo-list { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+        .hypo-item { padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; border-left: 4px solid var(--blue); }
+        .hypo-item.v { border-left-color: var(--green); }
+        .hypo-item.iv { border-left-color: var(--red); }
+        .hypo-round { font-family: var(--font-d); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--blue); margin-bottom: 4px; }
+        .hypo-item h4 { margin: 0 0 4px; font-size: 0.95rem; }
+        .hypo-item p { margin: 0; color: var(--text2); font-size: 0.85rem; }
+
+        /* Timeline */
+        .timeline { margin: 20px 0; }
+        .tl-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #F1F5F9; }
+        .tl-week { font-family: var(--font-d); font-weight: 700; font-size: 0.8rem; color: var(--blue); min-width: 60px; padding-top: 2px; }
+        .tl-content h4 { font-size: 0.9rem; margin: 0 0 4px; }
+        .tl-content p { font-size: 0.8rem; color: var(--text2); margin: 0; }
+
+        /* Alert */
+        .alert { padding: 16px 20px; border-radius: 12px; margin: 20px 0; font-size: 0.9rem; }
+        .alert-blue { background: var(--blue-50); border: 1px solid var(--blue-200); color: var(--blue-dark); }
+        .alert-green { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
+        .alert-amber { background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E; }
+        .alert strong { font-weight: 600; }
+
+        /* Pillar cards */
+        .pillar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin: 16px 0; overflow: hidden; }
+        .pillar-header { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: #F8FAFC; border-bottom: 1px solid #F1F5F9; }
+        .pillar-num { font-family: var(--font-d); font-size: 1.8rem; font-weight: 700; color: var(--blue-200); }
+        .pillar-icon { font-size: 2rem; }
+        .pillar-header h3 { margin: 0; font-size: 1.15rem; }
+        .pillar-header .tag { font-size: 0.7rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 1.5px; }
+        .pillar-body { padding: 20px 24px; }
+        .pillar-body p { color: var(--text2); font-size: 0.95rem; margin-bottom: 12px; }
+        .pillar-body ul { color: var(--text2); font-size: 0.9rem; padding-left: 20px; }
+        .pillar-body li { margin-bottom: 6px; }
+
+        /* Footer */
+        .footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--border); }
+        .footer p { color: var(--text3); font-size: 0.8rem; }
+
+        /* Responsive Mobile */
+        @media(max-width:768px) {
+            .container { padding: 0 16px; }
+            .hero { padding: 70px 16px 40px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 0.95rem; }
+            .hero-badge { font-size: 0.7rem; padding: 5px 12px; }
+            .section { padding: 40px 0; }
+            .section h2 { font-size: 1.4rem; }
+            .section-desc { font-size: 0.9rem; margin-bottom: 20px; }
+            .card-grid { grid-template-columns: 1fr; gap: 12px; }
+            .card { padding: 18px; }
+            .card h4 { font-size: 0.95rem; }
+            .card p { font-size: 0.85rem; }
+            .stat-row { gap: 10px; }
+            .stat-item { min-width: 0; flex: 1 1 calc(50% - 10px); padding: 12px 10px; }
+            .stat-num { font-size: 1.5rem; }
+            .stat-label { font-size: 0.7rem; }
+            .pillar-header { flex-wrap: wrap; padding: 14px 16px; gap: 10px; }
+            .pillar-header h3 { font-size: 1rem; }
+            .pillar-num { font-size: 1.4rem; }
+            .pillar-icon { font-size: 1.5rem; }
+            .pillar-body { padding: 16px; }
+            .pillar-body p { font-size: 0.85rem; }
+            .pillar-body ul { font-size: 0.85rem; }
+            .fw-step { padding: 14px; gap: 12px; }
+            .fw-letter { width: 40px; height: 40px; font-size: 1.2rem; }
+            .fw-step h4 { font-size: 0.85rem; }
+            .fw-step p, .fw-step .q { font-size: 0.8rem; }
+            .team-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .team-card { padding: 14px; }
+            .team-avatar { width: 44px; height: 44px; font-size: 1rem; }
+            .team-card h4 { font-size: 0.85rem; }
+            .team-card .role { font-size: 0.7rem; }
+            .team-card p { font-size: 0.75rem; }
+            .hypo-item { padding: 14px; }
+            .hypo-item h4 { font-size: 0.85rem; }
+            .hypo-item p { font-size: 0.8rem; }
+            .alert { padding: 12px 14px; font-size: 0.8rem; }
+            .tl-item { gap: 12px; }
+        }
+        @media(max-width:480px) {
+            .hero { padding: 65px 12px 32px; }
+            .hero h1 { font-size: 1.5rem; }
+            .stat-row { flex-direction: column; gap: 8px; }
+            .stat-item { flex: 1 1 100%; }
+            .team-grid { grid-template-columns: 1fr; }
+            .fw-step { flex-direction: column; align-items: center; text-align: center; }
+        }
+
+        /* Table scroll on mobile */
+        .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; border-radius: 10px; border: 1px solid var(--border); }
+        .table-wrap table { min-width: 700px; margin: 0; border: none; }
+        .table-wrap th { white-space: nowrap; }
+        .table-wrap td { min-width: 90px; }
+        @media(max-width:768px) {
+            .table-wrap table { min-width: 600px; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 10px 10px; }
+        }
+        @media(max-width:480px) {
+            .table-wrap table { min-width: 550px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 8px 6px; }
+        }
+
+        /* Word wrap safety */
+        h1, h2, h3, h4, p, li, span { 
+            overflow-wrap: break-word; 
+            word-wrap: break-word; 
+        }
+
+        /* Body overflow control */
+        body { overflow-x: hidden; }
+
+        /* Print */
+        @media print {
+            .nav, .hero-btns { display: none; }
+            body { font-size: 11pt; }
+            .section { padding: 20px 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">🔓 DECODE</a>
+            <div class="nav-links">
+                <a href="#problem">Vấn đề</a>
+                <a href="#solution">Giải pháp</a>
+                <a href="#framework">Framework</a>
+                <a href="#hypothesis">Giả thuyết</a>
+                <a href="#team">Đội ngũ</a>
+                <a href="#timeline">Lộ trình</a>
+                <a href="index.html">← Trang chủ EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">🏆 UNESCO Youth Hackathon 2026 • Track: AI & Media Literacy</div>
+        <h1>DECODE — <span>Giải Mã Thông Tin</span></h1>
+        <p>Hệ sinh thái giáo dục truyền thông đa phương tiện tích hợp <strong>Video Series</strong>, <strong>Board Game</strong> và <strong>Webtoon Comics</strong> — giúp giới trẻ nhận diện và phòng chống tin giả trong kỷ nguyên AI.</p>
+        <div class="hero-btns">
+            <a href="#solution" class="btn btn-primary">Xem Giải Pháp ↓</a>
+            <a href="index.html" class="btn btn-outline">Landing Page (EN)</a>
+        </div>
+    </section>
+
+    <!-- Bối cảnh & Vấn đề -->
+    <section class="section section-alt" id="problem">
+        <div class="container">
+            <span class="section-tag">Bối cảnh</span>
+            <h2>Tại sao cần <span>DECODE</span> ngay bây giờ?</h2>
+            <p class="section-desc">Giới trẻ Việt Nam đang đối mặt với "bão thông tin" chưa từng có — và hầu hết không được trang bị kỹ năng để tự bảo vệ mình.</p>
+
+            <div class="stat-row">
+                <div class="stat-item">
+                    <div class="stat-num">79M</div>
+                    <div class="stat-label">Người dùng MXH tại VN</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">72%</div>
+                    <div class="stat-label">Giới trẻ share mà không kiểm chứng</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">5.2h</div>
+                    <div class="stat-label">Screen time/ngày của Gen Z VN</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">117K+</div>
+                    <div class="stat-label">Nội dung bị gỡ H1/2026</div>
+                </div>
+            </div>
+
+            <h3>3 xu hướng nguy hiểm hội tụ năm 2026</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🤖</div>
+                    <h4>AI tạo tin giả</h4>
+                    <p>Deepfake, bài viết AI, hình ảnh tổng hợp — ngày càng khó phân biệt thật/giả. 68% Gen Z không nhận ra ảnh AI tạo.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h4>Bẫy thuật toán</h4>
+                    <p>Filter bubble & echo chamber khiến mỗi người chỉ thấy nội dung họ muốn nghe — tạo phân cực xã hội ngày càng sâu.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h4>Chia sẻ bản năng</h4>
+                    <p>Nội dung kích cảm xúc lan nhanh gấp 6 lần nội dung thật. Phần lớn share xảy ra trong vòng 0.8 giây — trước khi kịp suy nghĩ.</p>
+                </div>
+            </div>
+
+            <div class="alert alert-amber">
+                <strong>💡 Insight:</strong> Nghị định 174/2026 phạt tới 50 triệu VND cho hành vi lan truyền tin giả (hiệu lực 01/07/2026). Nhưng phạt chỉ trị triệu chứng — <strong>giáo dục mới giải quyết gốc rễ.</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- Giải pháp -->
+    <section class="section" id="solution">
+        <div class="container">
+            <span class="section-tag">Giải pháp</span>
+            <h2>DECODE Universe — <span>3 trụ cột, 1 vũ trụ</span></h2>
+            <p class="section-desc">Thay vì tạo 3 sản phẩm rời rạc, DECODE xây dựng một <strong>vũ trụ câu chuyện thống nhất</strong> — mỗi phương tiện kể một phần khác nhau, người dùng bắt đầu từ bất kỳ đâu và được dẫn dắt qua tất cả.</p>
+
+            <!-- Pillar 1 -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-num">01</div>
+                    <div class="pillar-icon">📺</div>
+                    <div>
+                        <h3>DECODE Stories — Video Series</h3>
+                        <div class="tag">THE HOOK — Gây tò mò, đặt vấn đề</div>
+                    </div>
+                </div>
+                <div class="pillar-body">
+                    <p>Chuỗi 6 tập mini-documentary (3-5 phút/tập) kể câu chuyện thật từ giới trẻ VN và thế giới. Mỗi tập gắn với 1 năng lực MIL cụ thể.</p>
+                    <ul>
+                        <li><strong>Ep.1 "The Viral Trap"</strong> — Câu chuyện bạn trẻ share tin giả gây hậu quả</li>
+                        <li><strong>Ep.2 "Who's Behind the Screen?"</strong> — Giải phẫu tài khoản giả & bot farm</li>
+                        <li><strong>Ep.3 "AI Wrote This"</strong> — Deepfake, AI content — phân biệt thật/giả</li>
+                        <li><strong>Ep.4 "The Algorithm Knows You"</strong> — Filter bubble & echo chamber</li>
+                        <li><strong>Ep.5 "Your Data, Their Profit"</strong> — Privacy & data harvesting</li>
+                        <li><strong>Ep.6 "Be the Signal"</strong> — Tạo nội dung có trách nhiệm</li>
+                    </ul>
+                    <p><strong>Sản xuất:</strong> Smartphone + CapCut + Canva = chi phí $0, chất lượng cao.</p>
+                    <p><strong>🔗 Kết nối:</strong> Mỗi tập kết thúc bằng "DECODE Challenge" — cùng scenario xuất hiện trong board game.</p>
+                </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-num">02</div>
+                    <div class="pillar-icon">🎲</div>
+                    <div>
+                        <h3>DECODE: The Game — Board Game</h3>
+                        <div class="tag">THE EXPERIENCE — Học qua trải nghiệm</div>
+                    </div>
+                </div>
+                <div class="pillar-body">
+                    <p>Board game cho 4-6 người chơi, 30-45 phút. Điều tra Content Cards (tin tức, post, meme), dùng DECODE Cards để kiểm chứng, tranh luận và bỏ phiếu.</p>
+                    <div class="table-wrap"><table>
+                        <tr><th>Phase</th><th>Tên</th><th>Thời gian</th><th>Hoạt động</th></tr>
+                        <tr><td>1</td><td>THE FEED</td><td>5 phút</td><td>Rút 5 Content Cards — phân loại THẬT / SAI LỆCH / GIẢ</td></tr>
+                        <tr><td>2</td><td>THE INVESTIGATION</td><td>15 phút</td><td>Dùng DECODE Cards fact-check, xử lý Event Cards, tranh luận</td></tr>
+                        <tr><td>3</td><td>THE VERDICT</td><td>10 phút</td><td>Bỏ phiếu → So đáp án → Tính điểm → Thảo luận phản tư</td></tr>
+                    </table></div>
+                    <div class="alert alert-green">
+                        <strong>🖨️ Print-and-Play:</strong> Toàn bộ game là PDF miễn phí — bất kỳ giáo viên nào cũng có thể in và chơi ngay. Chi phí = $0.
+                    </div>
+                    <p><strong>🔗 Kết nối:</strong> Mỗi Content Card có QR code → mở chapter comics liên quan + unlock video tương ứng.</p>
+                </div>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-num">03</div>
+                    <div class="pillar-icon">📖</div>
+                    <div>
+                        <h3>DECODE Chronicles — Webtoon Comics</h3>
+                        <div class="tag">THE DEEP DIVE — Đồng cảm qua câu chuyện</div>
+                    </div>
+                </div>
+                <div class="pillar-body">
+                    <p>Chuỗi 6 chapter webtoon phong cách manga/manhwa, tối ưu đọc dọc trên mobile. Mỗi chapter theo 1 nhân vật từ 1 quốc gia khác nhau.</p>
+                    <div class="table-wrap"><table>
+                        <tr><th>Nhân vật</th><th>Tuổi</th><th>Quốc gia</th><th>Chủ đề</th></tr>
+                        <tr><td><strong>Minh</strong></td><td>19</td><td>🇻🇳 Việt Nam</td><td>Từ "spreader" → "decoder" — share tin giả rồi tỉnh ngộ</td></tr>
+                        <tr><td><strong>Aisha</strong></td><td>22</td><td>🇳🇬 Nigeria</td><td>Phát hiện bot farm ở trường đại học</td></tr>
+                        <tr><td><strong>Kai</strong></td><td>20</td><td>🇯🇵 Nhật Bản</td><td>Giải mã deepfake của idol yêu thích</td></tr>
+                        <tr><td><strong>Luna</strong></td><td>21</td><td>🇧🇷 Brazil</td><td>Content creator bị đánh cắp hình ảnh</td></tr>
+                        <tr><td><strong>Sam</strong></td><td>18</td><td>🇺🇸 USA</td><td>Bị cyberbullying qua tin giả</td></tr>
+                        <tr><td><strong>Priya</strong></td><td>23</td><td>🇮🇳 Ấn Độ</td><td>Coder build tool chống tin giả</td></tr>
+                    </table></div>
+                    <p><strong>🔗 Kết nối:</strong> Mỗi chapter nhắc đến video tương ứng + tình huống cũng là Content Card trong game.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework -->
+    <section class="section section-alt" id="framework">
+        <div class="container">
+            <span class="section-tag">Phương pháp</span>
+            <h2>DECODE Framework — <span>6 bước giải mã</span></h2>
+            <p class="section-desc">Tên dự án = Phương pháp = Hành động. Dễ nhớ, mạnh mẽ, cover cả AI Literacy — vượt trội so với 3C2B của Clickbait (VinUni 2025).</p>
+
+            <div class="fw-steps">
+                <div class="fw-step">
+                    <div class="fw-letter" style="background:#EF4444">D</div>
+                    <div>
+                        <h4>Detect — Phát hiện</h4>
+                        <p class="q">"Có gì bất thường không? Cảm xúc đang bị kích động?"</p>
+                        <p>Nhận diện red flags: tiêu đề giật gân, ngôn ngữ khẩn cấp, quá hoàn hảo để là thật.</p>
+                    </div>
+                </div>
+                <div class="fw-step">
+                    <div class="fw-letter" style="background:#F59E0B">E</div>
+                    <div>
+                        <h4>Evidence — Bằng chứng</h4>
+                        <p class="q">"Nguồn nào? Có dẫn chứng cụ thể không?"</p>
+                        <p>Tìm trích dẫn, dữ liệu, chuyên gia có tên. Không có bằng chứng = không đáng tin.</p>
+                    </div>
+                </div>
+                <div class="fw-step">
+                    <div class="fw-letter" style="background:#10B981">C</div>
+                    <div>
+                        <h4>Cross-check — Kiểm tra chéo</h4>
+                        <p class="q">"Nguồn khác nói gì? Có ai xác nhận?"</p>
+                        <p>Kiểm tra ít nhất 3 nguồn độc lập. Chỉ 1 nguồn đưa tin = cần hoài nghi.</p>
+                    </div>
+                </div>
+                <div class="fw-step">
+                    <div class="fw-letter" style="background:#3B82F6">O</div>
+                    <div>
+                        <h4>Origin — Nguồn gốc</h4>
+                        <p class="q">"Ai tạo ra nội dung này? Người thật, bot, hay AI?"</p>
+                        <p>Kiểm tra danh tính, lịch sử, độ uy tín. Tìm dấu hiệu bot, AI watermark.</p>
+                    </div>
+                </div>
+                <div class="fw-step">
+                    <div class="fw-letter" style="background:#8B5CF6">D</div>
+                    <div>
+                        <h4>Determine Motive — Xác định động cơ</h4>
+                        <p class="q">"Tại sao nội dung này được tạo ra? Ai hưởng lợi?"</p>
+                        <p>Theo dấu tiền, quyền lực, sự chú ý. Clickbait? Propaganda? Hiểu động cơ = hiểu sự thật.</p>
+                    </div>
+                </div>
+                <div class="fw-step">
+                    <div class="fw-letter" style="background:#EC4899">E</div>
+                    <div>
+                        <h4>Evaluate Impact — Đánh giá tác động</h4>
+                        <p class="q">"Nếu share mà sai, ai bị ảnh hưởng?"</p>
+                        <p>Cân nhắc hậu quả trước khi share. Nút Share là loa phóng thanh — dùng có trách nhiệm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phân tích đối thủ -->
+    <section class="section" id="competitive">
+        <div class="container">
+            <span class="section-tag">Phân tích cạnh tranh</span>
+            <h2>Tại sao DECODE <span>vượt trội</span>?</h2>
+            <p class="section-desc">Phân tích các đội thắng UNESCO Hackathon 2024-2025 để tìm lỗ hổng chiến lược.</p>
+
+            <div class="table-wrap"><table>
+                <tr><th>Tiêu chí</th><th>Clickbait 🇻🇳 (2025)</th><th>MILBoard 🇮🇩 (2024)</th><th>DECODE (Chúng ta)</th></tr>
+                <tr><td>Sản phẩm</td><td>Board game + Web</td><td>Board game + App</td><td><strong>Video + Game + Comics (3 pillars)</strong></td></tr>
+                <tr><td>Framework</td><td>3C2B (5 yếu tố)</td><td>Không rõ</td><td><strong>DECODE 6 bước (cover AI)</strong></td></tr>
+                <tr><td>Storytelling</td><td>Không có narrative</td><td>Hạn chế</td><td><strong>Transmedia universe xuyên suốt</strong></td></tr>
+                <tr><td>Kết nối</td><td>Web riêng lẻ</td><td>App riêng lẻ</td><td><strong>QR codes liên kết 3 pillars</strong></td></tr>
+                <tr><td>Đa dạng</td><td>Chung chung</td><td>Indonesia focus</td><td><strong>6 nhân vật, 6 quốc gia, 3♂ 3♀</strong></td></tr>
+                <tr><td>Scalability</td><td>Trung bình</td><td>Trung bình</td><td><strong>Print-and-Play + Open Source</strong></td></tr>
+            </table></div>
+
+            <div class="alert alert-blue">
+                <strong>🔑 Lỗ hổng chiến lược:</strong> Chưa đội nào tạo được hệ sinh thái transmedia storytelling hoàn chỉnh. DECODE là đội ĐẦU TIÊN tích hợp 3 medium trong 1 narrative universe.
+            </div>
+        </div>
+    </section>
+
+    <!-- Giả thuyết & Validation -->
+    <section class="section section-alt" id="hypothesis">
+        <div class="container">
+            <span class="section-tag">Giả thuyết & Validation</span>
+            <h2>Chiến lược <span>nhiều vòng</span> validate</h2>
+            <p class="section-desc">Mỗi vòng, ta sẽ kiểm chứng 1 giả thuyết cốt lõi. Nếu sai → pivot nhanh. Nếu đúng → đào sâu.</p>
+
+            <div class="hypo-list">
+                <div class="hypo-item">
+                    <div class="hypo-round">Vòng 1 — Pitching (Nộp PDF + Video)</div>
+                    <h4>H1: "Concept transmedia MIL hấp dẫn hơn single-medium"</h4>
+                    <p><strong>Cách validate:</strong> Pitch video 3 phút trình bày concept, DECODE framework, demo 3 pillars. Nếu lọt vòng → giả thuyết đúng.</p>
+                    <p><strong>Deliverables:</strong> Proposal PDF + Pitch Video + Landing Page (website này)</p>
+                    <p><strong>Effort:</strong> 🟢 Nhẹ — chỉ cần concept + script + quay video</p>
+                </div>
+
+                <div class="hypo-item">
+                    <div class="hypo-round">Vòng 2 — Prototype (Nếu lọt vòng 1)</div>
+                    <h4>H2: "Board game DECODE tạo ra thay đổi hành vi thật sự ở người chơi"</h4>
+                    <p><strong>Cách validate:</strong> In Print-and-Play, tổ chức 3-5 buổi chơi thử với sinh viên. Đo pre/post survey về khả năng nhận diện tin giả.</p>
+                    <p><strong>Deliverables:</strong> Print-and-Play PDF + Video EP.1 + Comics Ch.1 (demo)</p>
+                    <p><strong>Effort:</strong> 🟡 Trung bình — cần thiết kế cards + quay video + vẽ comics</p>
+                </div>
+
+                <div class="hypo-item">
+                    <div class="hypo-round">Vòng 3 — MVP (Nếu lọt vòng 2)</div>
+                    <h4>H3: "Transmedia cross-linking thực sự tăng engagement so với single medium"</h4>
+                    <p><strong>Cách validate:</strong> Release full video series + game + comics. Đo % người dùng chuyển từ medium này sang medium khác qua QR codes.</p>
+                    <p><strong>Deliverables:</strong> Full 6 episodes + Full card set + 3+ comics chapters + Website hub</p>
+                    <p><strong>Effort:</strong> 🔴 Nặng — cần toàn bộ team sản xuất</p>
+                </div>
+
+                <div class="hypo-item">
+                    <div class="hypo-round">Vòng 4 — Scale (Nếu thắng giải)</div>
+                    <h4>H4: "Mô hình DECODE có thể localize cho các quốc gia khác"</h4>
+                    <p><strong>Cách validate:</strong> Partner với 2-3 trường/tổ chức youth ở SEA. Cung cấp toolkit, theo dõi adoption rate.</p>
+                    <p><strong>Deliverables:</strong> Localization toolkit + Training guide + Partnership agreements</p>
+                    <p><strong>Effort:</strong> 🔴 Nặng — cần partnership & community building</p>
+                </div>
+            </div>
+
+            <div class="alert alert-green">
+                <strong>📌 Chiến lược quan trọng:</strong> Vòng 1 chỉ cần pitching — <strong>KHÔNG cần real product hoàn chỉnh</strong>. Tập trung 100% vào concept mạnh + pitch video chất lượng + proposal PDF thuyết phục. Real product build dần ở các vòng sau.
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section" id="team">
+        <div class="container">
+            <span class="section-tag">Đội ngũ</span>
+            <h2>6 người — <span>Ít nhưng chất</span></h2>
+            <p class="section-desc">Cấu trúc team tối ưu cho UNESCO Hackathon: 5 mảng content/creative + 1 IT. Mỗi người 1 vai trò rõ ràng, không trùng lặp.</p>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👑</div>
+                    <h4>Team Lead / Storytelling</h4>
+                    <div class="role">🎯 Chiến lược & Kịch bản</div>
+                    <p>Xây dựng narrative xuyên suốt 3 pillars. Viết kịch bản video, biên tập nội dung, đảm bảo tính nhất quán.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">🎨</div>
+                    <h4>Designer / Illustrator</h4>
+                    <div class="role">🖌️ Thiết kế & Comics Art</div>
+                    <p>Thiết kế board game cards, vẽ webtoon comics, tạo visual identity & brand assets.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">🎬</div>
+                    <h4>Video Producer</h4>
+                    <div class="role">📹 Quay & Dựng phim</div>
+                    <p>Quay pitch video + video series. Dựng phim, motion graphics, chỉnh màu. Tối ưu cho social media.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">📝</div>
+                    <h4>Researcher / Content</h4>
+                    <div class="role">🔬 Nghiên cứu & Nội dung</div>
+                    <p>Research MIL framework, fact-check content cards, viết proposal document, thu thập data/statistics.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">📢</div>
+                    <h4>Community / Outreach</h4>
+                    <div class="role">🌐 Cộng đồng & Truyền thông</div>
+                    <p>Quản lý social media, liên hệ partnerships, tổ chức playtesting sessions, thu thập feedback.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">💻</div>
+                    <h4>IT / Developer</h4>
+                    <div class="role">⚡ Website & Digital Tools</div>
+                    <p>Build website hub, deploy, tạo board game online (nếu kịp), technical support cho toàn team.</p>
+                </div>
+            </div>
+
+            <h3>Phân công theo vòng thi</h3>
+            <div class="table-wrap"><table>
+                <tr><th>Vòng</th><th>Lead + Story</th><th>Designer</th><th>Video</th><th>Research</th><th>Community</th><th>IT</th></tr>
+                <tr><td><strong>Vòng 1</strong><br><small>Pitching</small></td><td>Viết script pitch video + proposal</td><td>Thiết kế slide/graphic cho video</td><td>Quay + dựng pitch video 3 phút</td><td>Research data + viết proposal PDF</td><td>Review + feedback</td><td>Deploy website + landing page</td></tr>
+                <tr><td><strong>Vòng 2</strong><br><small>Prototype</small></td><td>Viết script video EP.1 + comics Ch.1</td><td>Thiết kế cards + vẽ comics demo</td><td>Quay video EP.1</td><td>Tạo content cards + truth cards</td><td>Tổ chức playtest 3-5 buổi</td><td>Build board game online</td></tr>
+                <tr><td><strong>Vòng 3</strong><br><small>Full Build</small></td><td>Supervise tất cả content</td><td>Hoàn thiện full card set + comics</td><td>Quay full 6 episodes</td><td>Localization guide</td><td>Partnership + social media</td><td>Full website + game online</td></tr>
+            </table></div>
+        </div>
+    </section>
+
+    <!-- Vòng 1 Focus -->
+    <section class="section section-alt" id="round1">
+        <div class="container">
+            <span class="section-tag">Vòng 1 — Cần làm ngay</span>
+            <h2>Pitching: <span>PDF + Video 3 phút</span></h2>
+            <p class="section-desc">Deadline: <strong>16/08/2026</strong> — Còn ~1 tháng. Chỉ cần 2 deliverables: Proposal PDF (max 10MB) + Pitch Video (max 3 phút).</p>
+
+            <h3>Kịch bản Pitch Video (3 phút)</h3>
+            <div class="table-wrap"><table>
+                <tr><th>Thời gian</th><th>Nội dung</th><th>Ai đảm nhận</th></tr>
+                <tr><td>0:00 - 0:25</td><td><strong>HOOK</strong> — Stats gây sốc + fake news headlines</td><td>Video Producer (motion graphics)</td></tr>
+                <tr><td>0:25 - 0:45</td><td><strong>VẤN ĐỀ</strong> — Nghị định 174, education gap</td><td>Researcher (data + stats)</td></tr>
+                <tr><td>0:45 - 1:10</td><td><strong>DECODE reveal</strong> — 3 pillars + concept</td><td>Lead (narration) + Designer (graphics)</td></tr>
+                <tr><td>1:10 - 1:40</td><td><strong>DECODE Method</strong> — 6 bước animated</td><td>Designer (animation) + IT (support)</td></tr>
+                <tr><td>1:40 - 2:10</td><td><strong>DEMO</strong> — Board game + Comics + Video preview</td><td>Lead + Designer (mockups)</td></tr>
+                <tr><td>2:10 - 2:35</td><td><strong>IMPACT</strong> — Scalability, reach, UNESCO alignment</td><td>Researcher (numbers)</td></tr>
+                <tr><td>2:35 - 3:00</td><td><strong>TEAM + CLOSING</strong> — Giới thiệu đội + tagline</td><td>Tất cả (on camera)</td></tr>
+            </table></div>
+
+            <h3>Checklist Vòng 1</h3>
+            <div class="table-wrap"><table>
+                <tr><th>✓</th><th>Item</th><th>Phụ trách</th><th>Deadline</th></tr>
+                <tr><td>☐</td><td>Hoàn thiện DECODE framework visual</td><td>Designer</td><td>22/07</td></tr>
+                <tr><td>☐</td><td>Viết Proposal PDF tiếng Anh</td><td>Lead + Researcher</td><td>28/07</td></tr>
+                <tr><td>☐</td><td>Thiết kế mockup board game cards</td><td>Designer</td><td>28/07</td></tr>
+                <tr><td>☐</td><td>Tạo comics character concept art</td><td>Designer</td><td>01/08</td></tr>
+                <tr><td>☐</td><td>Viết script pitch video final</td><td>Lead + Video</td><td>01/08</td></tr>
+                <tr><td>☐</td><td>Quay pitch video</td><td>Video + Tất cả</td><td>08/08</td></tr>
+                <tr><td>☐</td><td>Edit + hoàn thiện pitch video</td><td>Video Producer</td><td>11/08</td></tr>
+                <tr><td>☐</td><td>Deploy website final</td><td>IT</td><td>11/08</td></tr>
+                <tr><td>☐</td><td>Review + feedback toàn bộ</td><td>Community + Tất cả</td><td>13/08</td></tr>
+                <tr><td>☐</td><td>Nộp bài</td><td>Lead</td><td>16/08</td></tr>
+            </table></div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section" id="timeline">
+        <div class="container">
+            <span class="section-tag">Lộ trình</span>
+            <h2>4 tuần — <span>Sprint tới deadline</span></h2>
+
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-week">Tuần 1<br><small>15-21/07</small></div>
+                    <div class="tl-content">
+                        <h4>🎯 Hoàn thiện concept + Team alignment</h4>
+                        <p>Họp team, phân công rõ ràng, thống nhất DECODE framework, character design, brand identity. Website deploy bản đầu.</p>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-week">Tuần 2<br><small>22-28/07</small></div>
+                    <div class="tl-content">
+                        <h4>📝 Content Creation</h4>
+                        <p>Viết Proposal PDF, thiết kế board game cards mockup, viết script pitch video, tạo comics concept art.</p>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-week">Tuần 3<br><small>29/07-04/08</small></div>
+                    <div class="tl-content">
+                        <h4>🎬 Production</h4>
+                        <p>Quay pitch video, dựng phim, hoàn thiện graphics, polish website, tạo demo assets.</p>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-week">Tuần 4<br><small>05-16/08</small></div>
+                    <div class="tl-content">
+                        <h4>✨ Polish + Submit</h4>
+                        <p>Review tất cả, chỉnh sửa final, export PDF, upload video, nộp bài trước 16/08.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNESCO Alignment -->
+    <section class="section section-alt">
+        <div class="container">
+            <span class="section-tag">UNESCO Alignment</span>
+            <h2>Phù hợp <span>giá trị UNESCO</span></h2>
+            <div class="card-grid">
+                <div class="card"><div class="card-icon">☮️</div><h4>Hòa bình</h4><p>Chống phân cực và hate speech thông qua tư duy phản biện.</p></div>
+                <div class="card"><div class="card-icon">🌈</div><h4>Đa dạng</h4><p>6 nhân vật, 6 quốc gia, 3 nam + 3 nữ, đa văn hóa.</p></div>
+                <div class="card"><div class="card-icon">🗣️</div><h4>Tự do biểu đạt</h4><p>Dạy tạo nội dung có trách nhiệm, KHÔNG kiểm duyệt.</p></div>
+                <div class="card"><div class="card-icon">📚</div><h4>SDG 4: Giáo dục</h4><p>Giáo dục toàn diện, bình đẳng, cơ hội cho tất cả.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background: linear-gradient(135deg, var(--blue), var(--purple)); text-align: center; padding: 60px 24px;">
+        <h2 style="font-family: var(--font-d); color: #fff; font-size: clamp(1.5rem, 3.5vw, 2.2rem); margin-bottom: 12px;">Chúng ta không chỉ dạy MIL.<br>Chúng ta biến nó thành <span style="color: #FBBF24;">trải nghiệm</span>.</h2>
+        <p style="color: rgba(255,255,255,0.8); font-family: var(--font-d); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 24px;">DECODE — Giải Mã Thông Tin</p>
+        <div style="display: inline-flex; flex-direction: column; gap: 4px; background: rgba(255,255,255,0.15); padding: 14px 28px; border-radius: 14px;">
+            <span style="color: rgba(255,255,255,0.9); font-size: 0.85rem;">🏆 UNESCO Youth Hackathon 2026</span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 0.8rem;">Deadline: 16/08/2026 • Thessaloniki, Greece 🇬🇷</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>🔓 DECODE — See Through the Noise • CC-BY-SA 4.0 • Made with ❤️ for Media Literacy</p>
+            <p style="margin-top: 8px;"><a href="index.html">English Landing Page</a> • <a href="proposal.html">Proposal Tiếng Việt</a></p>
+        </div>
+    </footer>
+</body>
+</html>
