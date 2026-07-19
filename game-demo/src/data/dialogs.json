@@ -1,0 +1,138 @@
+{
+  "start": {
+    "id": "start",
+    "speaker": "Hệ thống",
+    "text": "Chào mừng bạn đến với game tương tác: Bão Confession. Bạn sẽ vào vai Nam, đứng trước một cơ hội ứng cử Chủ tịch CLB truyền thông trường để giành học bổng du học 4 tỷ (gia đình đã phải thế chấp sổ đỏ để lo chi phí). Vy là bạn thân nhất của bạn từ thuở nhỏ. Cảnh báo: Game chứa các tình huống giằng xé đạo đức (Đúng vs Đúng) khốc liệt.",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "",
+    "nextNode": "scene1_1"
+  },
+  "scene1_1": {
+    "id": "scene1_1",
+    "speaker": "Nam",
+    "text": "Vy ơi! Cậu đã đọc bài đăng mới trên trang Confession trường chưa? Mọi người đang lan truyền bức ảnh cậu tranh cãi với thủ quỹ và vu khống cậu ăn cắp 5 triệu quỹ lớp mua son phấn hiệu...",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500",
+    "nextNode": "scene1_2"
+  },
+  "scene1_2": {
+    "id": "scene1_2",
+    "speaker": "Vy (Khóc nghẹn)",
+    "text": "Nam ơi, tớ không ăn cắp! Tớ chỉ đang đối chiếu sổ quỹ ngoài hành lang thôi, lúc đó tụi tớ cãi nhau về con số chênh lệch rồi ai đó chụp lén. Cả trường đang share bài viết đó chửi tớ. Tớ sợ quá, tớ không biết tin vào ai nữa...",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500",
+    "nextNode": "shieldy_intro"
+  },
+  "shieldy_intro": {
+    "id": "shieldy_intro",
+    "speaker": "Shieldy (Mascot)",
+    "text": "Khoan đã Nam! Tớ là Shieldy, trợ lý an toàn của cậu đây. Trước khi hành động, hãy bình tĩnh nhé. Cậu có thể tham gia các Sidequests điều tra để thu thập bằng chứng thay vì phản ứng bốc đồng lúc này. Đừng để cảm xúc lấn át!",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "shieldy_avatar.png",
+    "nextNode": "scene1_3"
+  },
+  "scene1_3": {
+    "id": "scene1_3",
+    "speaker": "Điện thoại của Nam (Tài khoản ẩn danh của Admin Confession nhắn tin)",
+    "text": "\"Mày khôn hồn thì bớt mõm lại. Nếu mày lên tiếng bênh vực con Vy, tao sẽ gỡ hồ sơ ứng cử Chủ tịch CLB truyền thông của mày và đăng phốt mày là đồng phạm. Im lặng đi thì cái ghế đó chắc chắn thuộc về mày.\"",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "",
+    "choices": [
+      {
+        "id": "choice1_a",
+        "text": "Lên tiếng công khai bênh vực Vy dưới bài viết (Bảo vệ bạn thân)",
+        "nextNode": "scene_public_defense",
+        "stateEffects": { "trust": 30, "viral": 40, "stress": 30 }
+      },
+      {
+        "id": "choice1_b",
+        "text": "Nhắn tin riêng an ủi Vy và chọn cách im lặng (Bảo vệ tương lai bản thân)",
+        "nextNode": "scene_private_silence",
+        "stateEffects": { "trust": -30, "viral": -10, "stress": -10 }
+      }
+    ]
+  },
+  "scene_public_defense": {
+    "id": "scene_public_defense",
+    "speaker": "Hệ thống",
+    "text": "Nam đăng bài đính chính và đối chất công khai dưới confession. Ngay lập tức, hàng chục học sinh tràn vào chửi Nam là đồng phạm bao che. Hồ sơ Chủ tịch CLB của Nam bị admin gỡ bỏ. Bố mẹ Nam mắng nhiếc vô cùng thất vọng vì Nam phá hỏng tương lai ứng cử đại học.",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "",
+    "nextNode": "scene_escalation_start"
+  },
+  "scene_private_silence": {
+    "id": "scene_private_silence",
+    "speaker": "Hệ thống",
+    "text": "Nam chọn cách im lặng. Nam trúng cử Chủ tịch CLB truyền thông. Nhưng Vy phát hiện ra người bạn thân nhất đã chọn sự nghiệp thay vì tin tưởng cô. Vy suy sụp hoàn toàn, khóa tài khoản và không đến trường nữa. Nam đứng nhìn chiếc ghế Chủ tịch với sự dằn vặt vô cùng.",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "",
+    "nextNode": "scene_escalation_start"
+  },
+  "scene_escalation_start": {
+    "id": "scene_escalation_start",
+    "speaker": "Vy (Gửi ảnh chụp tin nhắn đe dọa Deepfake cho Nam)",
+    "text": "Nam ơi, kẻ xấu đã ghép mặt tớ vào một bức ảnh nhạy cảm bằng AI Deepfake và dọa tống tiền tớ 10 triệu đồng, nếu không sẽ gửi cho bố mẹ tớ. Bố mẹ tớ rất bạo lực, nếu họ đọc được tớ sẽ bị nhốt đánh và bắt nghỉ học về quê làm ruộng mất... Tớ không muốn sống nữa...",
+    "background": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000",
+    "sprite": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500",
+    "nextNode": "shieldy_hint_2"
+  },
+  "shieldy_hint_2": {
+    "id": "shieldy_hint_2",
+    "speaker": "Shieldy (Mascot)",
+    "text": "Cẩn thận Nam! Việc phát tán ảnh nhạy cảm có thể vi phạm pháp luật và gây sang chấn tâm lý cho Vy. Tớ khuyên cậu nên dùng Evidence Path để mã hóa bằng chứng và trình báo Công an phường!",
+    "background": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000",
+    "sprite": "shieldy_avatar.png",
+    "nextNode": "scene_dilemma2"
+  },
+  "scene_dilemma2": {
+    "id": "scene_dilemma2",
+    "speaker": "Hệ thống (Tối hậu thư)",
+    "text": "Để giải oan cho Vy, Nam cần đưa ảnh chụp màn hình cuộc trò chuyện chứng minh Vy bị tống tiền. Tuy nhiên, bức ảnh này chứa cả các tin nhắn nhạy cảm Vy kể về việc bị bạo hành gia đình trước đây. Bạn có 2 lựa chọn tiến thoái lưỡng nan:",
+    "background": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000",
+    "sprite": "",
+    "choices": [
+      {
+        "id": "choice2_a",
+        "text": "Gửi ngay ảnh gốc để minh oan ngay lập tức (Minh oan nhanh nhưng lộ tin nhạy cảm)",
+        "nextNode": "scene_leaked_ending",
+        "stateEffects": { "trust": -40, "viral": 50, "stress": 40 }
+      },
+      {
+        "id": "choice2_b",
+        "text": "Dùng công cụ bảo mật Evidence Path che mờ và mã hóa (An toàn nhưng chậm trễ)",
+        "nextNode": "scene_delayed_ending",
+        "stateEffects": { "trust": 40, "viral": -20, "stress": 50 }
+      }
+    ]
+  },
+  "scene_leaked_ending": {
+    "id": "scene_leaked_ending",
+    "speaker": "Kết thúc: Sự phản bội lòng tin",
+    "text": "Vy được minh oan vụ ăn cắp, nhưng ảnh gốc lan truyền làm bố mẹ Vy đọc được tin nhắn nhạy cảm. Vy bị bố mẹ bạo hành dã man ngay trong đêm và ép chuyển trường về quê làm ruộng. Vy chặn liên lạc của Nam và hận Nam suốt đời vì đã chà đạp lòng tự trọng cuối cùng của cô bé. Nam cầm chiếc thẻ Chủ tịch nhưng lòng đầy hối hận vô bờ.",
+    "background": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000",
+    "sprite": "",
+    "nextNode": "ending_screen"
+  },
+  "scene_delayed_ending": {
+    "id": "scene_delayed_ending",
+    "speaker": "Kết thúc: Sự chậm trễ đau lòng",
+    "text": "Nam dùng công cụ che mờ và mã hóa an toàn, nhưng quy trình xác thực và trình báo Ban giám hiệu mất hơn 24 giờ. Trong thời gian chờ đợi đó, làn sóng dư luận quá tàn nhẫn khiến Vy hoảng loạn cực độ. Vy đã tự hại trong nhà vệ sinh trường trước khi cuộc họp diễn ra. Nam đứng chết lặng nhìn xe cấp cứu hú còi. Sự chậm trễ của công nghệ bảo mật đã gián tiếp hủy hoại cuộc đời bạn thân.",
+    "background": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000",
+    "sprite": "",
+    "nextNode": "ending_screen"
+  },
+  "ending_screen": {
+    "id": "ending_screen",
+    "speaker": "Hệ thống",
+    "text": "Cảm ơn bạn đã trải nghiệm EchoShield: Bão Confession. Trò chơi cho thấy: Trong thế giới mạng xã hội, không có quyết định nào là dễ dàng hay sạch sẽ trọn vẹn. Hãy luôn dũng cảm bênh vực nạn nhân một cách thông minh và thấu cảm. Bạn muốn chơi lại chứ?",
+    "background": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000",
+    "sprite": "",
+    "choices": [
+      {
+        "id": "restart",
+        "text": "Chơi lại từ đầu",
+        "nextNode": "start"
+      }
+    ]
+  }
+}
