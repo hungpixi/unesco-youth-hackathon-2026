@@ -4,6 +4,7 @@ const { marked } = require('marked');
 
 // Cấu hình các file đầu vào
 const paths = {
+  debai: path.join(__dirname, 'debai.md'),
   proposal: path.join(__dirname, 'EchoShield- UNESCO Youth Hackathon 2026 Proposal.md'),
   pho: path.join(__dirname, 'docs', 'ke_hoach_chien_luoc_pho_anh_hai.md'),
   pho3d: path.join(__dirname, 'docs', 'kien_truc_game_3d_genshin_style.md'),
@@ -35,89 +36,79 @@ function getHtmlContent(filePath) {
   }
 }
 
-// Hàm render bong bóng hội thoại phong cách Visual Novel
+// Hàm render bong bóng hội thoại phong cách Novel Reader (Tối giản)
 function renderDialogueBubbleHtml(speaker, action, speech, isMonologue) {
   const nameLower = speaker.toLowerCase();
-  let bubbleClass = '';
-  let tagClass = '';
-  
-  if (isMonologue) {
-    bubbleClass = 'bg-[#f8fafc] border-dashed border-2 border-slate-400 text-slate-700 italic';
-    tagClass = 'bg-slate-500 text-white border-2 border-slate-900';
-  } else if (nameLower.includes('nam')) {
-    bubbleClass = 'bg-indigo-50/60 border-2 border-slate-900 text-slate-900';
-    tagClass = 'bg-indigo-600 text-white border-2 border-slate-900';
-  } else if (nameLower.includes('shieldy')) {
-    bubbleClass = 'bg-violet-50/60 border-2 border-slate-900 text-slate-900';
-    tagClass = 'bg-violet-600 text-white border-2 border-slate-900';
+  let speakerColor = 'text-indigo-600';
+  if (nameLower.includes('shieldy')) {
+    speakerColor = 'text-purple-600';
   } else if (nameLower.includes('vy')) {
-    bubbleClass = 'bg-emerald-50/60 border-2 border-slate-900 text-slate-900';
-    tagClass = 'bg-emerald-600 text-white border-2 border-slate-900';
+    speakerColor = 'text-emerald-600';
+  } else if (nameLower.includes('nam')) {
+    speakerColor = 'text-blue-600';
   } else {
-    bubbleClass = 'bg-slate-100 border-2 border-slate-900 text-slate-900';
-    tagClass = 'bg-slate-700 text-white border-2 border-slate-900';
+    speakerColor = 'text-slate-700';
   }
   
-  const actionHtml = action ? `<span class="action-tag text-[10px] md:text-[11px] font-bold text-slate-500 italic">(${action})</span>` : '';
+  const actionHtml = action ? `<span class="text-slate-400 italic font-normal text-xs md:text-sm">(${action})</span> ` : '';
   
-  return `<div class="dialogue-bubble flex flex-col gap-1.5 border-2 border-slate-900 rounded-2xl p-4 max-w-[92%] md:max-w-[85%] my-2 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] ${bubbleClass}">
-    <div class="flex flex-wrap items-center gap-2">
-      <span class="speaker-tag text-[10px] font-black uppercase tracking-wider rounded-lg px-2.5 py-1 ${tagClass}">${speaker}</span>
+  if (isMonologue) {
+    return `<div class="novel-line monologue-line my-3 pl-4 border-l-2 border-slate-300">
+      <span class="font-black text-slate-500 text-xs md:text-sm">${speaker} (Độc thoại):</span>
       ${actionHtml}
-    </div>
-    <p class="text-xs md:text-sm font-bold m-0 leading-relaxed">${speech}</p>
+      <span class="text-slate-600 italic font-semibold text-xs md:text-sm">"${speech}"</span>
+    </div>`;
+  }
+  
+  return `<div class="novel-line dialogue-line my-2.5">
+    <span class="font-black ${speakerColor} text-xs md:text-sm mr-1">${speaker}:</span>
+    ${actionHtml}
+    <span class="text-slate-800 font-semibold text-xs md:text-sm leading-relaxed">${speech}</span>
   </div>`;
 }
 
-// Hàm render danh sách lựa chọn và biến động chỉ số
+// Hàm render danh sách lựa chọn (Tối giản)
 function renderChoicesHtml(choices) {
   if (choices.length === 0) return '';
   
-  let html = `<div class="mt-4 border-2 border-slate-900 rounded-2xl p-4 bg-amber-50/50 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] flex flex-col gap-3">
-    <span class="block text-[10px] font-black uppercase text-amber-700 tracking-wider flex items-center gap-1.5">
+  let html = `<div class="my-4 p-4 bg-amber-50/40 border border-amber-200 rounded-xl flex flex-col gap-3">
+    <span class="block text-[11px] font-black uppercase text-amber-700 tracking-wider flex items-center gap-1.5">
       <i data-lucide="help-circle" class="w-4 h-4 shrink-0"></i> Lựa chọn rẽ nhánh & Biến động chỉ số
     </span>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">`;
+    <div class="flex flex-col gap-3">`;
     
   for (let i = 0; i < choices.length; i++) {
     const choice = choices[i];
-    const choiceNum = choice.num ? `<span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-0.5">Lựa chọn ${choice.num}</span>` : '';
+    const choiceNum = choice.num ? `<span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mr-1.5">Lựa chọn ${choice.num}:</span>` : '';
     
     // Parse chỉ số biến động thành các badge
     let badgesHtml = '';
     if (choice.stats) {
       const statsList = choice.stats.split(',');
-      badgesHtml = '<div class="flex flex-wrap gap-1.5 mt-2">';
+      badgesHtml = '<div class="inline-flex flex-wrap gap-1.5 ml-2">';
       for (let j = 0; j < statsList.length; j++) {
         const stat = statsList[j].trim();
-        let badgeColor = 'bg-rose-50 border-rose-300 text-rose-700';
+        let badgeColor = 'bg-rose-50 border-rose-200 text-rose-600';
         if ((stat.includes('+') && stat.includes('Trust')) || (stat.includes('-') && stat.includes('Stress')) || (stat.includes('-') && stat.includes('Viral'))) {
-          badgeColor = 'bg-emerald-50 border-emerald-300 text-emerald-700';
-        } else if (stat.includes('Viral') || stat.includes('Stress') || stat.includes('Trust')) {
-          badgeColor = 'bg-amber-50 border-amber-300 text-amber-700';
+          badgeColor = 'bg-emerald-50 border-emerald-200 text-emerald-600';
         }
-        badgesHtml += `<span class="px-2 py-0.5 border rounded-md text-[9px] font-black uppercase tracking-wider ${badgeColor}">${stat}</span>`;
+        badgesHtml += `<span class="px-1.5 py-0.5 border rounded text-[9px] font-bold uppercase tracking-wider ${badgeColor}">${stat}</span>`;
       }
       badgesHtml += '</div>';
     }
     
     let shieldyHtml = '';
     if (choice.shieldy) {
-      shieldyHtml = `<div class="mt-2 pt-2 border-t border-slate-100 flex gap-1.5 items-start">
-        <i data-lucide="shield" class="w-3.5 h-3.5 text-violet-500 shrink-0 mt-0.5"></i>
-        <p class="text-[11px] text-violet-700 italic font-bold m-0 leading-relaxed">Shieldy: ${choice.shieldy}</p>
-      </div>`;
+      shieldyHtml = `<p class="text-[11px] text-purple-600 italic font-semibold m-0 mt-1 pl-4 border-l border-purple-200">Shieldy: ${choice.shieldy}</p>`;
     }
     
-    html += `<div class="border-2 border-slate-900 bg-white rounded-xl p-3.5 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] flex flex-col justify-between">
-      <div>
+    html += `<div class="bg-white border border-slate-200 rounded-lg p-3 shadow-sm">
+      <div class="flex flex-wrap items-baseline">
         ${choiceNum}
-        <p class="text-xs md:text-sm font-black text-slate-900 m-0 leading-relaxed">${choice.text}</p>
-      </div>
-      <div>
+        <span class="text-xs md:text-sm font-bold text-slate-900">${choice.text}</span>
         ${badgesHtml}
-        ${shieldyHtml}
       </div>
+      ${shieldyHtml}
     </div>`;
   }
   
@@ -125,7 +116,7 @@ function renderChoicesHtml(choices) {
   return html;
 }
 
-// Hàm parser chính cho kịch bản Visual Novel
+// Hàm parser chính cho kịch bản Visual Novel (Novel Style)
 function parseScriptToVisualNovelHtml(markdown) {
   const lines = markdown.split('\n');
   let html = '';
@@ -136,7 +127,7 @@ function parseScriptToVisualNovelHtml(markdown) {
   
   function closeLists() {
     if (inCharacterList) {
-      html += '</ul></div>';
+      html += '</div></div>';
       inCharacterList = false;
     }
     if (inChoiceList) {
@@ -157,18 +148,18 @@ function parseScriptToVisualNovelHtml(markdown) {
     const chapterMatch = line.match(/^\s*(?:[-*]\s+)?\*\*(Chapter \d+:\s*.*?)\*\*$/i) || line.match(/^\s*#\s*(Chapter \d+:\s*.*?)$/i);
     if (chapterMatch) {
       closeLists();
-      html += `<div class="chapter-header-vn text-center py-6 my-6 bg-indigo-50 border-4 border-slate-900 rounded-3xl shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
-        <h2 class="text-xl md:text-2xl font-black text-indigo-950 uppercase tracking-widest m-0 px-4">${chapterMatch[1]}</h2>
+      html += `<div class="chapter-header-novel text-center py-4 my-6 border-y border-slate-300">
+        <h2 class="text-lg md:text-xl font-black text-slate-900 uppercase tracking-widest m-0 px-4">${chapterMatch[1]}</h2>
       </div>`;
       continue;
     }
     
-    // 2. Nhận diện Scene (Hỗ trợ cả ### SCENE_ và **SCENE_**)
+    // 2. Nhận diện Scene (Tối giản)
     const sceneMatch = line.match(/^\s*(?:#{2,4}\s*|\*?\*?)(SCENE_\d+(?::\s*.*)?)\*?\*?$/i);
     if (sceneMatch && sceneMatch[1].toUpperCase().includes('SCENE_')) {
       closeLists();
       if (inScene) {
-        html += '</div>'; // Đóng scene-card trước đó
+        html += '</div>'; // Đóng scene-container trước đó
       }
       inScene = true;
       const fullTitle = sceneMatch[1];
@@ -183,61 +174,47 @@ function parseScriptToVisualNovelHtml(markdown) {
         sceneName = 'Bắt đầu phân cảnh';
       }
       
-      html += `<div class="scene-card border-4 border-slate-900 bg-[#fbfaf7] rounded-3xl p-6 mb-8 flex flex-col gap-5 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] transition-all">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-4 border-slate-900 pb-3 gap-2">
-          <span class="inline-block px-3 py-1.5 bg-indigo-100 border-2 border-slate-900 text-indigo-900 text-xs font-black rounded-lg uppercase tracking-wider w-fit shrink-0">${sceneId}</span>
-          <h3 class="text-base md:text-lg font-black text-slate-900 m-0 text-left sm:text-right leading-snug">${sceneName}</h3>
+      html += `<div class="novel-scene-block border-b border-slate-100 py-6 flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 px-2 py-0.5 bg-indigo-50 border border-indigo-200 rounded">${sceneId}</span>
+          <h3 class="text-sm md:text-base font-black text-slate-800 m-0">${sceneName}</h3>
         </div>`;
       continue;
     }
     
-    // 3. Nhận diện Bối cảnh (BG)
+    // 3. Nhận diện Bối cảnh (BG) (Tối giản)
     const bgMatch = line.match(/^\s*(?:[-*]\s+)?\*?\*?Bối cảnh\s*\(BG\):?\*?\*?\s*(.*)$/i);
     if (bgMatch) {
       closeLists();
-      html += `<div class="bg-amber-50/60 border-2 border-slate-900 rounded-2xl p-4 flex gap-3 items-start shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
-        <div class="p-2 bg-amber-100 border-2 border-slate-900 rounded-xl shrink-0">
-          <i data-lucide="map-pin" class="w-4 h-4 text-amber-800"></i>
-        </div>
-        <div class="min-w-0 flex-1">
-          <span class="block text-[10px] font-black uppercase text-amber-700 tracking-wider mb-0.5">Bối cảnh (BG)</span>
-          <p class="text-xs md:text-sm font-bold text-slate-700 m-0 leading-relaxed">${bgMatch[1]}</p>
-        </div>
-      </div>`;
+      html += `<p class="text-xs md:text-sm text-slate-500 font-bold leading-relaxed m-0 italic flex gap-1.5 items-center">
+        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
+        <span>Bối cảnh: ${bgMatch[1]}</span>
+      </p>`;
       continue;
     }
     
-    // 4. Nhận diện Diễn biến kịch tính
+    // 4. Nhận diện Diễn biến kịch tính (Tối giản)
     const actionMatch = line.match(/^\s*(?:[-*]\s+)?\*?\*?Diễn biến kịch tính:?\*?\*?\s*(.*)$/i);
     if (actionMatch) {
       closeLists();
-      html += `<div class="bg-sky-50/50 border-2 border-slate-900 rounded-2xl p-4 flex gap-3 items-start shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
-        <div class="p-2 bg-sky-100 border-2 border-slate-900 rounded-xl shrink-0">
-          <i data-lucide="activity" class="w-4 h-4 text-sky-700"></i>
-        </div>
-        <div class="min-w-0 flex-1">
-          <span class="block text-[10px] font-black uppercase text-sky-700 tracking-wider mb-0.5">Diễn biến kịch tính</span>
-          <p class="text-xs md:text-sm font-bold text-slate-700 m-0 leading-relaxed">${actionMatch[1]}</p>
-        </div>
-      </div>`;
+      html += `<p class="text-xs md:text-sm text-slate-600 font-bold leading-relaxed m-0 pl-3 border-l-2 border-slate-300">
+        ${actionMatch[1]}
+      </p>`;
       continue;
     }
     
-    // 5. Nhận diện Sprites & Biểu cảm nhân vật
+    // 5. Nhận diện Sprites & Biểu cảm nhân vật (Tối giản)
     const spriteMatch = line.match(/^\s*(?:[-*]\s+)?\*?\*?Sprites\s*&\s*Biểu cảm(?:\s*nhân vật)?:?[\s*]*$/i);
     if (spriteMatch) {
       closeLists();
       inCharacterList = true;
-      html += `<div class="bg-slate-50 border-2 border-slate-900 rounded-2xl p-4 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
-        <span class="block text-[10px] font-black uppercase text-slate-500 tracking-wider mb-2 flex items-center gap-1.5">
-          <i data-lucide="users" class="w-4 h-4"></i> Nhân vật có mặt & Biểu cảm
-        </span>
-        <ul class="list-disc pl-5 text-xs md:text-sm text-slate-700 font-bold flex flex-col gap-1.5 m-0">`;
+      html += `<div class="my-1.5 text-xs text-slate-500 font-bold flex flex-wrap gap-x-3 gap-y-1 items-center">
+        <span class="uppercase tracking-wider flex items-center gap-1"><i data-lucide="users" class="w-3 h-3"></i> Nhân vật:</span>`;
       continue;
     }
     
     // 6. Nhận diện Lựa chọn rẽ nhánh & Biến động chỉ số
-    const choiceHeaderMatch = line.match(/^\s*(?:[-*]\s+)?\*?\*?Lựa chọn rẽ nhánh\s*&\s*Biến động chỉ số:?\*?\*?\s*$/i);
+    const choiceHeaderMatch = line.match(/^\s*(?:[-*]\s+)?\*?\*?Lựa chọn rẽ nhánh\s*&\s*(?:Biến động chỉ số|Biến động chỉ số:?)\*?\*?[\s*]*$/i);
     if (choiceHeaderMatch) {
       closeLists();
       inChoiceList = true;
@@ -250,7 +227,7 @@ function parseScriptToVisualNovelHtml(markdown) {
       continue;
     }
     
-    // 8. Nhận diện Độc thoại nội tâm và Thoại nhân vật (CHECK TRƯỚC list item thông thường)
+    // 8. Nhận diện Độc thoại nội tâm và Thoại nhân vật
     const dialogueMatch = line.match(/^\s*(?:[-*]\s+)?\*\*(.*?)\*\*\s*(.*)$/);
     if (dialogueMatch) {
       closeLists();
@@ -299,7 +276,7 @@ function parseScriptToVisualNovelHtml(markdown) {
       const listContent = line.replace(/^[-*]\s+/, '').trim();
       
       if (inCharacterList) {
-        html += `<li>${listContent}</li>`;
+        html += `<span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px] font-semibold">${listContent}</span>`;
         continue;
       }
       
@@ -351,6 +328,7 @@ function getScriptHtmlContent(filePath) {
 }
 
 const htmlContent = {
+  debai: getHtmlContent(paths.debai),
   proposal: getHtmlContent(paths.proposal),
   pho: getHtmlContent(paths.pho),
   pho3d: getHtmlContent(paths.pho3d),
@@ -678,70 +656,39 @@ const template = `
       color: #0f172a;
     }
 
-    /* Script dialogue reader - Visual Novel Style (Bright Theme) */
+    /* Script dialogue reader - Novel Style (Minimalist & Clean) */
     .script-dialogue {
-      max-width: 1000px;
+      max-width: 800px;
       margin-inline: auto;
+      background-color: #ffffff;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-    .chapter-header-vn {
-      background-color: #f0f2fe;
-      border: 4px solid #0f172a;
-      box-shadow: 4px 4px 0px 0px #0f172a;
-      border-radius: 24px;
+    .chapter-header-novel {
+      border-top: 2px solid #0f172a;
+      border-bottom: 2px solid #0f172a;
+      padding-block: 16px;
       margin-block: 24px;
     }
-    .scene-card {
-      background-color: #ffffff;
-      border: 4px solid #0f172a;
-      box-shadow: 6px 6px 0px 0px #0f172a;
-      border-radius: 28px;
-      padding: 24px;
-      margin-bottom: 32px;
+    .novel-scene-block {
+      border-bottom: 1px solid #e2e8f0;
+      padding-block: 20px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      transition: all 200ms ease;
+      gap: 12px;
     }
-    .scene-card:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 8px 8px 0px 0px #0f172a;
+    .novel-line {
+      margin-block: 6px;
+      line-height: 1.6;
     }
-    .dialogue-bubble {
-      border: 2px solid #0f172a;
-      box-shadow: 3px 3px 0px 0px #0f172a;
-      border-radius: 20px;
-      padding: 14px 18px;
-      margin-block: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      width: 100%;
-      transition: all 150ms ease;
-    }
-    .dialogue-bubble:hover {
-      transform: translate(-1px, -1px);
-      box-shadow: 4px 4px 0px 0px #0f172a;
-    }
-    .speaker-tag {
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border-radius: 10px;
-      padding: 5px 12px;
-      border: 2px solid #0f172a;
-      display: inline-block;
-      width: fit-content;
-      box-shadow: 1px 1px 0px 0px #0f172a;
-    }
-    .action-tag {
-      font-size: 11px;
-      color: #64748b;
-      font-style: italic;
-      font-weight: 600;
+    .monologue-line {
+      border-left: 3px solid #64748b;
+      padding-left: 12px;
+      background-color: #f8fafc;
+      padding-block: 6px;
+      border-radius: 0 8px 8px 0;
     }
 
     /* Mobile tabs layout */
@@ -830,32 +777,21 @@ const template = `
         overflow-x: hidden;
       }
       
-      /* Visual Novel Responsive Mobile Styles */
-      .chapter-header-vn {
-        border-width: 3px !important;
-        box-shadow: 3px 3px 0px 0px #0f172a !important;
-        border-radius: 18px !important;
+      /* Novel Responsive Mobile Styles */
+      .chapter-header-novel {
+        padding-block: 12px !important;
         margin-block: 16px !important;
-        padding-block: 14px !important;
       }
-      .chapter-header-vn h2 {
+      .chapter-header-novel h2 {
         font-size: 14px !important;
-        line-height: 1.4 !important;
       }
-      .scene-card {
-        padding: 14px 12px !important;
-        border-width: 3px !important;
-        box-shadow: 4px 4px 0px 0px #0f172a !important;
-        border-radius: 20px !important;
-        margin-bottom: 20px !important;
-        gap: 14px !important;
+      .novel-scene-block {
+        padding-block: 14px !important;
+        gap: 10px !important;
       }
-      .dialogue-bubble {
-        padding: 10px 12px !important;
-        border-width: 2px !important;
-        box-shadow: 2px 2px 0px 0px #0f172a !important;
-        border-radius: 16px !important;
-        max-width: 95% !important;
+      .novel-line {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
       }
       .mobile-tabs {
         scrollbar-width: thin !important;
@@ -991,29 +927,34 @@ const template = `
         <div class="sidebar-card flex flex-col gap-1">
           <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 px-2">Menu Tài Liệu</h2>
           
-          <button onclick="switchTab('proposal')" id="btn-proposal" class="tab-btn sidebar-menu-item w-full bg-indigo-600 text-white transition">
+          <button onclick="switchTab('debai')" id="btn-debai" class="tab-btn sidebar-menu-item w-full bg-indigo-600 text-white transition">
+            <i data-lucide="help-circle" class="w-4 h-4"></i>
+            <span>1. Đề Bài UNESCO</span>
+          </button>
+
+          <button onclick="switchTab('proposal')" id="btn-proposal" class="tab-btn sidebar-menu-item w-full text-slate-600 hover:bg-slate-50 transition">
             <i data-lucide="file-text" class="w-4 h-4"></i>
-            <span>1. Đề Án Chính Thức</span>
+            <span>2. Đề Án Chính Thức</span>
           </button>
 
           <button onclick="switchTab('pho')" id="btn-pho" class="tab-btn sidebar-menu-item w-full text-slate-600 hover:bg-slate-50 transition">
             <i data-lucide="utensils" class="w-4 h-4"></i>
-            <span>2. Chiến Lược Phở Anh Hai</span>
+            <span>3. Triết lý Phở Anh Hai</span>
           </button>
 
           <button onclick="switchTab('pho3d')" id="btn-pho3d" class="tab-btn sidebar-menu-item w-full text-slate-600 hover:bg-slate-50 transition">
             <i data-lucide="box" class="w-4 h-4"></i>
-            <span>3. Kiến trúc Web3D Genshin</span>
+            <span>4. Kiến trúc Web3D Genshin</span>
           </button>
 
           <button onclick="switchTab('gdd')" id="btn-gdd" class="tab-btn sidebar-menu-item w-full text-slate-600 hover:bg-slate-50 transition">
             <i data-lucide="cpu" class="w-4 h-4"></i>
-            <span>4. Kiến Trúc GDD</span>
+            <span>5. Kiến Trúc GDD</span>
           </button>
 
           <button onclick="switchTab('script')" id="btn-script" class="tab-btn sidebar-menu-item w-full text-slate-600 hover:bg-slate-50 transition">
             <i data-lucide="book-open" class="w-4 h-4"></i>
-            <span>5. Kịch Bản 5 Chương</span>
+            <span>6. Kịch Bản 5 Chương</span>
           </button>
         </div>
 
@@ -1041,8 +982,9 @@ const template = `
         <!-- Mobile horizontal tabs (visible only on mobile) -->
         <div class="mobile-tabs-container">
           <div class="mobile-tabs">
-            <button onclick="switchTab('proposal')" id="m-btn-proposal" class="tab-btn-m px-3 py-2 bg-indigo-600 text-white rounded-lg text-xs font-bold">Proposal</button>
-            <button onclick="switchTab('pho')" id="m-btn-pho" class="tab-btn-m px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">Phở Chiến Lược & Cảm Hứng</button>
+            <button onclick="switchTab('debai')" id="m-btn-debai" class="tab-btn-m px-3 py-2 bg-indigo-600 text-white rounded-lg text-xs font-bold">Đề Bài</button>
+            <button onclick="switchTab('proposal')" id="m-btn-proposal" class="tab-btn-m px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">Proposal</button>
+            <button onclick="switchTab('pho')" id="m-btn-pho" class="tab-btn-m px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">Phở Triết Lý</button>
             <button onclick="switchTab('pho3d')" id="m-btn-pho3d" class="tab-btn-m px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">Kiến Trúc Web3D</button>
             <button onclick="switchTab('gdd')" id="m-btn-gdd" class="tab-btn-m px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">Kiến Trúc GDD</button>
             <button onclick="switchTab('script')" id="m-btn-script" class="tab-btn-m px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold">Kịch Bản 5 Chương</button>
@@ -1056,8 +998,13 @@ const template = `
           </div>
         </div>
         
+        <!-- Tab 0: Debai -->
+        <div id="tab-debai" class="tab-content prose max-w-none">
+          ${htmlContent.debai}
+        </div>
+
         <!-- Tab 1: Proposal -->
-        <div id="tab-proposal" class="tab-content prose max-w-none">
+        <div id="tab-proposal" class="tab-content prose max-w-none hidden">
           ${htmlContent.proposal}
         </div>
 
